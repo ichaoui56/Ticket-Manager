@@ -13,7 +13,7 @@ class Database
     function __construct()
     {
         $this->conn = new mysqli($this->db_host, $this->db_user, $this->db_password, $this->db_name);
-        $sql = "CREATE DATABASE IF NOT EXISTS " . $this->db_name;
+        $sql = "CREATE DATABASE IF NOT EXISTS Ticket ";
         $this->conn->query($sql);
 
         $sql = "CREATE TABLE IF NOT EXISTS users (
@@ -21,7 +21,7 @@ class Database
             userName TEXT, 
             userEmail TEXT UNIQUE, 
             Password TEXT, 
-            userPicture LONGBLOB)";
+            userPicture text DEFAULT '../src/pictures/avatar.png' )";
         $this->conn->query($sql);
         if($this->conn->query($sql)){
             echo 'table user created sucssessfully <br>';
@@ -83,7 +83,5 @@ class Database
         return ($this->conn);
     }
 }
-
-
-$database = new Database();
-$conn = $database->connection();
+$db = new Database;
+$conn = $db->connection();
