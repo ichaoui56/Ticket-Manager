@@ -15,19 +15,21 @@ class Users
 
     function getUserData($email)
     {
-        $sql = "SELECT * FROM users WHERE UserEmail=?";
+        $sql = "SELECT * FROM users WHERE userEmail=?";
         $stmt = mysqli_stmt_init($this->conn);
         mysqli_stmt_prepare($stmt, $sql);
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
         $res = mysqli_stmt_get_result($stmt);
+        $error = mysqli_stmt_error($stmt);
         return (mysqli_fetch_assoc($res));
+
     }
     function login($email, $password)
     {
         $row = $this->getUserData($email);
         if ($row) {
-            if (password_verify($password, $row["password"])) {
+            if (password_verify($password, $row["Password"])) {
                 $_SESSION["log"] = true;
                 $_SESSION["user_id"] = $row["user_id"];
                 $_SESSION["email"] = $row["email"];
@@ -36,7 +38,7 @@ class Users
                 return false;
             }
         } else {
-            throw new Exception("user_not_found");
+            throw new Exception($row["UserEmail"]);
             return false;
         }
         return true;
