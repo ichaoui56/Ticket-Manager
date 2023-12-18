@@ -17,17 +17,17 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form class="login">
+    <form action="" method="post" class="login">
         <h3>Login</h3>
 
         <label for="username">Username</label>
-        <input placeholder="Enter your email" autocomplete="off" class="input" name="text" type="text">
+        <input placeholder="Enter your email" autocomplete="off" class="input" name="username" type="text">
 
         <label for="password">Password</label>
         <input placeholder="Enter your password" autocomplete="off" class="input" name="password" type="password">
 
         <div class="btn">
-            <button class="button">
+            <button type="submit" name="submit" class="button">
                 <span class="button_lg">
                     <span class="button_sl"></span>
                     <span class="button_text">Login Now</span>
@@ -38,7 +38,7 @@
         <p>Need an account?<a style="cursor: pointer;" class="registerBtn"> Create an account</a></p>
     </form>
 
-    <form class="register hidden">
+    <form action="../includes/RegisterTraitement.php" method="post" class="register hidden">
         <h3>Register</h3>
 
         <label for="username">Username</label>
@@ -50,11 +50,8 @@
         <label for="username">Password</label>
         <input placeholder="Enter your password" autocomplete="off" class="input" name="password" type="password">
 
-        <label for="password">Confirm password</label>
-        <input placeholder="Enter your password" autocomplete="off" class="input" name="cpassword" type="password">
-
         <div class="btn">
-            <button class="button">
+            <button type="submit" name="submit" class="button">
                 <span class="button_lg">
                     <span class="button_sl"></span>
                     <span class="button_text">Register Now</span>
