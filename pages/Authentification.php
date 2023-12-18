@@ -17,11 +17,11 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form action="" method="post" class="login">
+    <form action="../includes/LoginTraitement.php" method="post" class="login">
         <h3>Login</h3>
 
         <label for="username">Username</label>
-        <input placeholder="Enter your email" autocomplete="off" class="input" name="username" type="text">
+        <input placeholder="Enter your email" autocomplete="off" class="input" name="email" type="text">
 
         <label for="password">Password</label>
         <input placeholder="Enter your password" autocomplete="off" class="input" name="password" type="password">
