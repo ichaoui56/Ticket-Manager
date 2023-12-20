@@ -40,8 +40,9 @@ $userData = $user->getAllUsers($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./src/css/style.css">
+    <link rel="icon" type="image/png" href="./src/pictures/avito.png" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <title>Document</title>
+    <title>Avito Ticket Manager</title>
 </head>
 
 <body class="bg-gray-300 " style="overflow-x: hidden;">
@@ -72,7 +73,7 @@ $userData = $user->getAllUsers($conn);
 
     <aside class="flex overflow-hidden fixed flex-col w-60 h-full px-4  overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
         <a href="#" class="mx-auto ">
-            <img class="w-auto top-0 h-14 mb-5 z-20" src="./avito_logo-removebg-preview.png" alt="">
+            <img class="w-auto top-0 h-14 mb-5 z-20" src="./src/pictures/avito_logo-removebg-preview.png" alt="">
         </a>
         <div class="flex flex-col items-center mt-6 -mx-2">
             <img class="object-cover w-24 h-24 mx-2 rounded-full" src="<?= substr($_SESSION["userpicture"], 1); ?>" alt="avatar">
@@ -90,14 +91,14 @@ $userData = $user->getAllUsers($conn);
                     <span class="dashboard mx-4 font-medium">Dashboard</span>
                 </a>
 
-                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                <!-- <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
 
                     <span class="ProfileBtn mx-4 font-medium">Accounts</span>
-                </a>
+                </a> -->
 
                 <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -107,14 +108,7 @@ $userData = $user->getAllUsers($conn);
                     <span class="TicketBtn mx-4 font-medium">My Tickets</span>
                 </a>
 
-                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10.3246 4.31731C10.751 2.5609 13.249 2.5609 13.6754 4.31731C13.9508 5.45193 15.2507 5.99038 16.2478 5.38285C17.7913 4.44239 19.5576 6.2087 18.6172 7.75218C18.0096 8.74925 18.5481 10.0492 19.6827 10.3246C21.4391 10.751 21.4391 13.249 19.6827 13.6754C18.5481 13.9508 18.0096 15.2507 18.6172 16.2478C19.5576 17.7913 17.7913 19.5576 16.2478 18.6172C15.2507 18.0096 13.9508 18.5481 13.6754 19.6827C13.249 21.4391 10.751 21.4391 10.3246 19.6827C10.0492 18.5481 8.74926 18.0096 7.75219 18.6172C6.2087 19.5576 4.44239 17.7913 5.38285 16.2478C5.99038 15.2507 5.45193 13.9508 4.31731 13.6754C2.5609 13.249 2.5609 10.751 4.31731 10.3246C5.45193 10.0492 5.99037 8.74926 5.38285 7.75218C4.44239 6.2087 6.2087 4.44239 7.75219 5.38285C8.74926 5.99037 10.0492 5.45193 10.3246 4.31731Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
 
-                    <span class="mx-4 font-medium">Settings</span>
-                </a>
                 <a class="flex items-center px-4 py-2 mt-32 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="./includes/logout.php">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
@@ -254,7 +248,7 @@ $userData = $user->getAllUsers($conn);
                 </div>
             </section>
         </div>
-        <form action="./includes/AddArticle.php" method="post">
+        <form id="addTicketForm" class="add-ticket-form" action="./includes/AddArticle.php" method="post">
             <div class="hidden add-ticket min-h-screen flex flex-col sm:py-20 ml-52">
                 <div class="relative py-3 sm:max-w-xl sm:mx-auto">
                     <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
@@ -731,12 +725,12 @@ $userData = $user->getAllUsers($conn);
 
                                         <td class="px-4 py-3 border text-sm"><?= $ticketIdData["date"] ?></td>
                                         <td class="px-4 py-3 border text-sm">
-                                            <button class="Btn">Edit
+                                            <!-- <button class="Btn">Edit
                                                 <svg class="svg" viewBox="0 0 512 512">
                                                     <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z">
                                                     </path>
                                                 </svg>
-                                            </button>
+                                            </button> -->
 
                                             <form action="./includes/deleteTraitement.php?ticket_id=<?= $ticketDetails[0]['ticket_id'] ?>" method="post">
                                                 <button type="submit" name="submit" class="Btn1 ml-5" style="background-color: red;">Delete
@@ -777,6 +771,7 @@ $userData = $user->getAllUsers($conn);
             }));
         });
     </script>
+    
     <script src="./src/js/main.js"></script>
 </body>
 
