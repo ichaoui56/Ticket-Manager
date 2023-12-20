@@ -30,7 +30,7 @@ class Ticket
 
     function getTicketDetails($conn)
     {
-        $sql = "SELECT * FROM tickets";
+        $sql = "SELECT * FROM tickets WHERE is_deleted = 0";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
         mysqli_stmt_execute($stmt);
@@ -39,12 +39,13 @@ class Ticket
         while ($row = mysqli_fetch_assoc($res)) {
             $ticketData[] = $row;
         }
-        return $ticketData;
+        return @$ticketData;
+
     }
 
-    function getTicketById($conn ,$user_id)
+    function getTicketById($conn, $user_id)
     {
-        $sql = "SELECT * FROM tickets WHERE user_id = $user_id ";
+        $sql = "SELECT * FROM tickets WHERE user_id = $user_id AND is_deleted = 0 ";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
         mysqli_stmt_execute($stmt);
@@ -53,7 +54,7 @@ class Ticket
         while ($row = mysqli_fetch_assoc($res)) {
             $users[] = $row;
         }
-        return $users;
+        return @$users;
     }
 
     function getAllTags($conn)
