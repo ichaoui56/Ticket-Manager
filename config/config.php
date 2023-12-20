@@ -18,16 +18,15 @@ class Database
 
         $sql = "CREATE TABLE IF NOT EXISTS users (
             user_id INT PRIMARY KEY AUTO_INCREMENT, 
-            userName TEXT, 
-            userEmail TEXT UNIQUE, 
+            username TEXT, 
+            useremail TEXT UNIQUE, 
             Password TEXT, 
-            userPicture text DEFAULT '../src/pictures/avatar.png' )";
+            userpicture text  )";
         $this->conn->query($sql);
-        if($this->conn->query($sql)){
-            echo 'table user created sucssessfully <br>';
+        if ($this->conn->query($sql)) {
         }
 
-        
+
         $sql = "CREATE TABLE IF NOT EXISTS comments (
             comment_id INT PRIMARY KEY AUTO_INCREMENT, 
             comment TEXT, 
@@ -35,35 +34,40 @@ class Database
             FOREIGN KEY (user_id) REFERENCES users(user_id))";
         $this->conn->query($sql);
         if ($this->conn->query($sql)) {
-            echo 'table comments created sucssessfully <br>';
         }
+
         
+
         $sql = "CREATE TABLE IF NOT EXISTS tags (
             tag_id INT PRIMARY KEY AUTO_INCREMENT, 
             tag TEXT UNIQUE)";
         $this->conn->query($sql);
         if ($this->conn->query($sql)) {
-            echo 'table tags created sucssessfully <br>';
         }
-
         $sql = "CREATE TABLE IF NOT EXISTS tickets (
             ticket_id INT PRIMARY KEY AUTO_INCREMENT, 
             subject TEXT, 
             description TEXT, 
-            assignment INT, 
             status TEXT,
             priority text, 
             date INT, 
             is_deleted TINYINT(1) DEFAULT 0,
             user_id INT, 
+            FOREIGN KEY (user_id) REFERENCES users(user_id))";
+
+        $sql = "CREATE TABLE IF NOT EXISTS tag_ticket (
+            ticket_id INT, 
             tag_id INT,
-            FOREIGN KEY (assignment) REFERENCES users(user_id),
-            FOREIGN KEY (user_id) REFERENCES users(user_id),
+            FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id),
             FOREIGN KEY (tag_id) REFERENCES tags(tag_id))";
         $this->conn->query($sql);
-        if ($this->conn->query($sql)) {
-            echo 'table tickets created sucssessfully <br>';
-        }
+
+        $sql = "CREATE TABLE IF NOT EXISTS assignment (
+            ticket_id INT, 
+            user_id INT,
+            FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id),
+            FOREIGN KEY (user_id) REFERENCES users(user_id))";
+        $this->conn->query($sql);
 
         $sql = "INSERT INTO Tags (tag) VALUES 
             ('Complaint'), 
@@ -74,7 +78,6 @@ class Database
             ON DUPLICATE KEY UPDATE tag = VALUES(tag)";
         $this->conn->query($sql);
         if ($this->conn->query($sql)) {
-            echo 'value insert sucssessfully <br>';
         }
     }
 
