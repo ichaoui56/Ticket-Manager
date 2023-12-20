@@ -9,7 +9,7 @@ if (isset($_POST["submit"])) {
     try {
         $user = new Users($conn);
         $LoginResult = $user->login($email, $password);
-        header("Location: ../pages/Authentification.php?login=success");
+        header("Location: ../index.php?login=success");
         exit();
     } catch (Exception $e) {
         $errorMessage = $e->getMessage();
