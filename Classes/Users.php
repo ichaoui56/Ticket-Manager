@@ -1,11 +1,6 @@
 <?php
 class Users
 {
-    private $user_id;
-    private $username;
-    private $email;
-    private $password;
-    private $picture;
     private $conn;
 
     function __construct($conn)
@@ -13,9 +8,21 @@ class Users
         $this->conn = $conn;
     }
 
+    public function getAllUsers($conn)
+    {
+        $sql = "SELECT * FROM users";
+        $res = $conn->query($sql);
+        $userData = [];
+
+        while ($row = $res->fetch_assoc()) {
+            $userData[] = $row;
+        }
+        return $userData;
+    }
+
     function getUserData($email)
     {
-        $sql = "SELECT * FROM users WHERE userEmail=?";
+        $sql = "SELECT * FROM users WHERE useremail=?";
         $stmt = mysqli_stmt_init($this->conn);
         mysqli_stmt_prepare($stmt, $sql);
         mysqli_stmt_bind_param($stmt, "s", $email);
@@ -25,6 +32,9 @@ class Users
         return (mysqli_fetch_assoc($res));
 
     }
+
+
+
     function login($email, $password)
     {
         $row = $this->getUserData($email);
@@ -32,26 +42,28 @@ class Users
             if (password_verify($password, $row["Password"])) {
                 $_SESSION["log"] = true;
                 $_SESSION["user_id"] = $row["user_id"];
-                $_SESSION["email"] = $row["email"];
+                $_SESSION["userpicture"] = $row["userpicture"];
+                $_SESSION["username"] = $row["username"];
+                $_SESSION["email"] = $row["useremail"];
             } else {
                 throw new Exception("password_is_not_correct");
                 return false;
             }
         } else {
-            throw new Exception($row["UserEmail"]);
+            throw new Exception($row["useremail"]);
             return false;
         }
         return true;
     }
 
-    function register($username, $email, $password)
+    function register($username, $email, $password, $picture)
     {
         $row = $this->getUserData($email);
         if (!$row) {
-            $sql = "INSERT INTO users (userName, UserEmail, password) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO users (username, useremail, Password, userpicture) VALUES (?, ?, ?, ?)";
             $stmt = mysqli_stmt_init($this->conn);
             mysqli_stmt_prepare($stmt, $sql);
-            mysqli_stmt_bind_param($stmt, "sss", $username, $email, $password);
+            mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $password, $picture);
             mysqli_stmt_execute($stmt);
         } else {
             throw new Exception("user_exists");
