@@ -17,15 +17,13 @@ $ticketTagData = $ticketObj->getAllArticleTags($conn);
 $ticketDetails = $ticketObj->getTicketDetails($conn);
 $ticketTag = $ticketObj->getAllTags($conn);
 
+
 // $ticketId = $ticket->getTicketId($conn, $ticketId);
 
 // $AssignedAgent = $ticket->getAllassignedAgent($conn, 17);
 // foreach ($AssignedAgent as $agent) {
-// echo '<pre>';
-// print_r($agent);
-// echo '</pre>';
-// }
-// die();
+
+$ticketbyid = $ticketObj->getTicketById($conn, $_SESSION["user_id"]);
 
 $user = new Users($conn);
 $userData = $user->getAllUsers($conn);
@@ -209,13 +207,13 @@ $userData = $user->getAllUsers($conn);
 
                                         <td class="px-4 py-3 w-72 border text-md font-semibold"><?= $ticket["subject"] ?>
                                         </td>
-                                        <td class="px-4 py-3 w-72 flex flex-row border text-xs">
+                                        <td class="px-4 py-3 flex flex-row border text-xs">
                                             <?php
                                             // Assuming $ticket is the current ticket in the loop
 
                                             foreach ($AssignedAgent as $agent) {
                                             ?>
-                                                <div class="flex flex-row items-center w-20 -space-x-4">
+                                                <div class="flex flex-row items-center w-20 -space-x-2">
                                                     <img alt="Assigned Agent" src="<?= substr($agent["userpicture"], 1); ?>" class="relative inline-block h-12 w-12 rounded-full border-2 border-white object-cover object-center hover:z-10 focus:z-10" />
                                                 </div>
                                             <?php } ?>
@@ -233,11 +231,9 @@ $userData = $user->getAllUsers($conn);
                                             <?php }
                                             } ?>
                                         </td>
-                                        <td class="px-4 py-6 border border-t-0 flex text-xs">
-                                            <svg fill="#d64646" width="20px" height="20px" viewBox="0 0 20 20">
-                                                <path d="M9.25 16.75L9.25 10.6225L6.5575 13.3075L5.5 12.25L10 7.75L14.5 12.25L13.4425 13.3075L10.75 10.6225L10.75 16.75H9.25Z" fill="#D64646"></path>
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99717 3.23291L8.93439 4.29569L8.94043 4.30173L5.5 7.74216L6.56278 8.80494L10.0032 5.36452L13.4436 8.80493L14.5064 7.74215L11.066 4.30173L11.072 4.2957L10.0092 3.23292L10.0032 3.23895L9.99717 3.23291Z" fill="#D64646"></path>
-                                            </svg>
+
+                                        <td class="px-4 py-3  border text-xs">
+
                                             <span class="px-2 py-1 font-semibold leading-tight text-red-700 rounded-sm">
                                                 <?= $ticket["priority"] ?> </span>
                                         </td>
@@ -690,60 +686,78 @@ $userData = $user->getAllUsers($conn);
                                 </tr>
                             </thead>
                             <tbody class="bg-white">
+                                <?php foreach ($ticketbyid as $ticketIdData) {
+                                    $AssignedAgent = $ticketObj->getAllassignedAgent($conn, $ticketIdData["ticket_id"]);
+                                ?>
 
-                                <tr data-href="./decription.html" class="cursor-pointer hover:bg-gray-200 text-gray-700">
-                                    <td class="px-4 py-3 w-72 border text-md font-semibold">We need to fix the admin
-                                    </td>
-                                    <td class="px-4 py-3 border text-xs">
-                                        <!-- component -->
-                                        <div class="flex items-center w-20 -space-x-4">
-                                            <img alt="user 5" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1760&amp;q=80" class="relative inline-block h-12 w-12 rounded-full border-2 border-white object-cover object-center hover:z-10 focus:z-10" />
-                                            <img alt="user 5" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1760&amp;q=80" class="relative inline-block h-12 w-12 rounded-full border-2 border-white object-cover object-center hover:z-10 focus:z-10" />
-                                        </div>
-                                    </td>
-                                    <td class="px-4 py-3 border text-xs">
-                                        <span class="px-2 py-1 font-semibold leading-tight text-purple-700 bg-green-100 rounded-sm">
-                                            Need help </span>
-                                    </td>
-                                    <td class="px-4 py-6 border border-t-0 flex text-xs">
-                                        <svg fill="#d64646" width="20px" height="20px" viewBox="0 0 20 20">
-                                            <path d="M9.25 16.75L9.25 10.6225L6.5575 13.3075L5.5 12.25L10 7.75L14.5 12.25L13.4425 13.3075L10.75 10.6225L10.75 16.75H9.25Z" fill="#D64646"></path>
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99717 3.23291L8.93439 4.29569L8.94043 4.30173L5.5 7.74216L6.56278 8.80494L10.0032 5.36452L13.4436 8.80493L14.5064 7.74215L11.066 4.30173L11.072 4.2957L10.0092 3.23292L10.0032 3.23895L9.99717 3.23291Z" fill="#D64646"></path>
-                                        </svg>
-                                        <span class="px-2 py-1 font-semibold leading-tight text-red-700 rounded-sm">
-                                            Urgent </span>
-                                    </td>
-                                    <td class="px-4 py-3 border text-xs">
+                                    <tr data-href="./decription.html" class="cursor-pointer hover:bg-gray-200 text-gray-700">
+                                        <td class="px-4 py-3 w-72 border text-md font-semibold"><?= $ticketIdData["subject"] ?>
+                                        </td>
+                                        <td class="px-4 py-3 flex flex-row border text-xs">
+                                            <?php
+                                            // Assuming $ticket is the current ticket in the loop
 
-                                        <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">
-                                            In progress </span>
-                                    </td>
+                                            foreach ($AssignedAgent as $agent) {
 
-                                    <td class="px-4 py-3 border text-sm">14/12/2023</td>
-                                    <td class="px-4 py-3 border flex flex-row text-sm">
-                                        <button class="Btn">Edit
-                                            <svg class="svg" viewBox="0 0 512 512">
-                                                <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z">
-                                                </path>
-                                            </svg>
-                                        </button>
+                                            ?>
+                                                <div class="flex flex-row items-center w-20 -space-x-4">
+                                                    <img alt="Assigned Agent" src="<?= substr($agent["userpicture"], 1); ?>" class="relative inline-block h-12 w-12 rounded-full border-2 border-white object-cover object-center hover:z-10 focus:z-10" />
+                                                </div>
+                                            <?php } ?>
 
-                                        <button class="Btn1 ml-5">Delete
-                                            <svg class="svg1" viewBox="0 0 512 512">
-                                                <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
-                                                </path>
-                                            </svg>
-                                        </button>
+                                        </td>
+                                        <td class="px-4 py-3 border text-xs">
+                                            <?php foreach ($ticketTag as $tag) {
+                                                if ($tag["ticket_id"] == $ticketIdData["ticket_id"]) {
+                                            ?>
+                                                    <div class="flex flex-col">
+                                                        <span class="px-2 py-1 mt-2 font-semibold leading-tight text-purple-700 bg-green-100 rounded-sm">
+                                                            <?= $tag["tag"] ?>
+                                                        </span>
+                                                    </div>
+                                            <?php }
+                                            } ?>
+                                        </td>
+                                        <td class="px-4 py-3 border text-xs">
+
+                                            <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">
+                                                <?= $ticketIdData["priority"] ?> </span>
+                                        </td>
+                                        <td class="px-4 py-3 border text-xs">
+
+                                            <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">
+                                                <?= $ticketIdData["status"] ?> </span>
+                                        </td>
+
+                                        <td class="px-4 py-3 border text-sm"><?= $ticketIdData["date"] ?></td>
+                                        <td class="px-4 py-3 border text-sm">
+                                            <button class="Btn">Edit
+                                                <svg class="svg" viewBox="0 0 512 512">
+                                                    <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z">
+                                                    </path>
+                                                </svg>
+                                            </button>
+
+                                            <form action="./includes/deleteTraitement.php?ticket_id=<?= $ticketDetails[0]['ticket_id'] ?>" method="post">
+                                                <button type="submit" name="submit" class="Btn1 ml-5" style="background-color: red;">Delete
+                                                    <svg class="svg1" viewBox="0 0 512 512">
+                                                        <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </form>
                     </div>
 
                     </td>
 
                     </tr>
-                    </tbody>
-                    </table>
+                <?php } ?>
+                </tbody>
+                </table>
                 </div>
         </div>
         </section>
+
         </div>
     </main>
     <script>
